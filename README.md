@@ -67,8 +67,9 @@ Improve markdown2html.py by parsing Headings Markdown syntax for generating HTML
 Syntax: (you can assume it will be strictly this syntax)
 <table>
   <th>
-    <tr>hello</tr>
+    Hello
   </th>
+  <td>World!.</td>
 </table>
 
   
