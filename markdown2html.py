@@ -1,16 +1,20 @@
 #!/usr/bin/python3
 """
-Converts a Markdown file to HTML, parsing headings and unordered list syntax.
+Converts a Markdown file to HTML
+parsing headings,
+unordered,
+and ordered list syntax.
 """
 
 import sys
 import os.path
+import re
 
 
 def convert_markdown_to_html(markdown_file, output_file):
     """
-    Converts a Markdown file to HTML, parsing headings
-    and unordered list syntax.
+    Converts a Markdown file to HTML, parsing headings,
+    unordered, and ordered list syntax.
 
     Args:
         markdown_file (str): The name of the Markdown file.
@@ -31,6 +35,15 @@ def convert_markdown_to_html(markdown_file, output_file):
         '######': 'h6'
     }
 
+    # Dictionary to map Markdown list characters to HTML tags
+    list_mapping = {
+        '*': 'ul',
+        '1.': 'ol'
+    }
+
+    # Regular expression pattern to match ordered list syntax
+    ordered_list_pattern = re.compile(r'^\d+\.')
+
     # Read the contents of the Markdown file
     with open(markdown_file, 'r') as f:
         lines = f.readlines()
@@ -43,24 +56,30 @@ def convert_markdown_to_html(markdown_file, output_file):
             # Extract heading level and text
             heading_level, heading_text = line.split(' ', 1)
             html_tag = heading_mapping.get(heading_level, 'h1')
-            # Map Markdown heading level to HTML tag
             html_lines.append(f"<{html_tag}>{heading_text}</{html_tag}>")
-            # Generate HTML line with corresponding tag
-        elif line.startswith('- '):
+        elif line.startswith('- ') or ordered_list_pattern.match(line):
+            list_char = line[0]
+            # Get the first character of the line
+            list_tag = list_mapping.get(list_char, 'ul')
+            # Map list character to HTML tag
             if not in_list:
-                html_lines.append('<ul>')
-                # Start unordered list
+                html_lines.append(f'<{list_tag}>')
                 in_list = True
-            # Extract list item text and add to HTML
-            list_item_text = line[2:]
-            html_lines.append(f"<li>{list_item_text}</li>")
+            if ordered_list_pattern.match(line):
+                # For ordered lists, remove the numbers and dot from the line
+                line = line.replace(re.search(r'^\d+\.', line).group(), '')
+            list_item_text = line[2:] if list_char == '*' else line[3:]
+            # Remove list character from text
+            html_lines.append(f"<li>{list_item_text.strip()}</li>")
         else:
             if in_list:
-                html_lines.append('</ul>')
-                # End unordered list if no more list items
+                html_lines.append(f'</{list_tag}>')
                 in_list = False
             html_lines.append(line)
-            # If not a heading or list item, simply append the line
+
+    # If a list is still open, close it
+    if in_list:
+        html_lines.append(f'</{list_tag}>')
 
     # Write HTML output to the specified file
     with open(output_file, 'w') as f:
