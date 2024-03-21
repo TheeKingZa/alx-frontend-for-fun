@@ -1,139 +1,115 @@
 #!/usr/bin/python3
-"""
-Converts a Markdown file to HTML
-parsing headings,
-unordered,
-and ordered list syntax,
-paragraph syntax,
-and bold syntax with special formatting rules.
-"""
+"""Markdown to HTML Converter"""
 
 import sys
-import os.path
+import os
 import re
 import hashlib
 
 
+def print_usage():
+    """Prints script usage"""
+    print("Usage: ./markdown2html.py README.md README.html", file=sys.stderr)
+
+
+def parse_headings(line):
+    """Parse headings syntax"""
+    # Check for headings syntax and replace with HTML tags
+    match = re.match(r'^(#+)\s(.*)', line)
+    if match:
+        level = len(match.group(1))
+        title = match.group(2)
+        return f"<h{level}>{title}</h{level}>"
+    return line
+
+
+def parse_listings(line):
+    """Parse listings syntax"""
+    # Check for unordered listing syntax and replace with HTML tags
+    if re.match(r'^\s*-\s(.*)', line):
+        return "<li>" + line.strip()[2:] + "</li>"
+
+    # Check for ordered listing syntax and replace with HTML tags
+    if re.match(r'^\s*\*\s(.*)', line):
+        return "<li>" + line.strip()[2:] + "</li>"
+
+    return line
+
+
+def parse_paragraph(line):
+    """Parse paragraph syntax"""
+    # Check for empty line and return empty string
+    if line.strip() == "":
+        return ""
+
+    # Check for simple text and replace with HTML tags
+    return f"<p>\n    {line.strip()}\n</p>\n"
+
+
+def parse_bold_and_emphasis(line):
+    """Parse bold and emphasis text syntax"""
+    # Replace **bold** with <b>bold</b>
+    line = re.sub(r'\*\*(.*?)\*\*', r'<b>\1</b>', line)
+    # Replace __emphasis__ with <em>emphasis</em>
+    line = re.sub(r'__(.*?)__', r'<em>\1</em>', line)
+    return line
+
+
+def parse_special_syntax(line):
+    """Parse special syntax"""
+    # Replace [[Hello]] with MD5 hash of "Hello"
+    line = re.sub(
+        r'\[\[(.*?)\]\]',
+        lambda match: hashlib.md5(match.group(1).encode()).hexdigest(),
+        line
+    )
+    # Remove all occurrences of 'c' (case insensitive) from ((Hello Chicago))
+    line = re.sub(
+        r'\(\((.*?)\)\)',
+        lambda match: match.group(1).replace('c', '').replace('C', ''),
+        line
+    )
+    return line
+
+
 def convert_markdown_to_html(markdown_file, output_file):
-    """
-    Converts a Markdown file to HTML, parsing headings,
-    unordered, and ordered list syntax, paragraph syntax,
-    and bold syntax with special formatting rules.
-
-    Args:
-        markdown_file (str): The name of the Markdown file.
-        output_file (str): The name of the output HTML file.
-    """
-    if not os.path.isfile(markdown_file):
-        # Check if the Markdown file exists
-        print(f"Missing {markdown_file}", file=sys.stderr)
-        sys.exit(1)
-
-    # Dictionary to map Markdown heading levels to HTML tags
-    heading_mapping = {
-        '#': 'h1',
-        '##': 'h2',
-        '###': 'h3',
-        '####': 'h4',
-        '#####': 'h5',
-        '######': 'h6'
-    }
-
-    # Dictionary to map Markdown list characters to HTML tags
-    list_mapping = {
-        '*': 'ul',
-        '1.': 'ol'
-    }
-
-    # Regular expression pattern to match ordered list syntax
-    ordered_list_pattern = re.compile(r'^\d+\.')
-
-    # Regular expression pattern to match bold syntax
-    bold_pattern = re.compile(r'\*\*(.*?)\*\*')
-
-    # Regular expression pattern to match special formatting syntax
-    special_format_pattern = re.compile(r'\[\[(.*?)\]\]|\(\((.*?)\)\)')
-
-    # Read the contents of the Markdown file
+    """Convert Markdown to HTML"""
     with open(markdown_file, 'r') as f:
         lines = f.readlines()
 
-    html_lines = []
-    in_list = False
-    in_paragraph = False
-    for line in lines:
-        line = line.strip()
-        if line.startswith('#'):
-            # Extract heading level and text
-            heading_level, heading_text = line.split(' ', 1)
-            html_tag = heading_mapping.get(heading_level, 'h1')
-            html_lines.append(f"<{html_tag}>{heading_text}</{html_tag}>")
-        elif line.startswith('- ') or ordered_list_pattern.match(line):
-            list_char = line[0]
-            # Get the first character of the line
-            list_tag = list_mapping.get(list_char, 'ul')
-            # Map list character to HTML tag
-            if not in_list:
-                html_lines.append(f'<{list_tag}>')
-                in_list = True
-            if ordered_list_pattern.match(line):
-                # For ordered lists, remove the numbers and dot from the line
-                line = line.replace(re.search(r'^\d+\.', line).group(), '')
-            list_item_text = line[2:] if list_char == '*' else line[3:]
-            # Remove list character from text
-            html_lines.append(f"<li>{list_item_text.strip()}</li>")
-        elif line:
-            if in_list:
-                html_lines.append(f'</{list_tag}>')
-                in_list = False
-            if not in_paragraph:
-                html_lines.append('<p>')
-                in_paragraph = True
-
-            # Replace bold syntax with HTML tags
-            line = bold_pattern.sub(r'<b>\1</b>', line)
-
-            # Apply special formatting rules
-            line = special_format_pattern.sub(
-                lambda m: hashlib.md5(m.group(1).lower().encode()).hexdigest()
-                if m.group(1) else m.group(2).replace('c', '', -1).title(),
-                line
-            )
-
-            html_lines.append(line)
-        else:
-            if in_list:
-                html_lines.append(f'</{list_tag}>')
-                in_list = False
-            if in_paragraph:
-                html_lines.append('</p>')
-                in_paragraph = False
-
-    # If a list is still open, close it
-    if in_list:
-        html_lines.append(f'</{list_tag}>')
-    # If a paragraph is still open, close it
-    if in_paragraph:
-        html_lines.append('</p>')
-
-    # Write HTML output to the specified file
+    # Parse each line and write to output file
     with open(output_file, 'w') as f:
-        f.write('\n'.join(html_lines))
+        for line in lines:
+            line = parse_headings(line)
+            line = parse_listings(line)
+            line = parse_paragraph(line)
+            line = parse_bold_and_emphasis(line)
+            line = parse_special_syntax(line)
+            f.write(line)
 
-    print("Conversion successful!")
+
+def main():
+    """Main function"""
+    # Check number of arguments
+    if len(sys.argv) != 3:
+        print_usage()
+        sys.exit(1)
+
+    # Get input and output file names
+    markdown_file = sys.argv[1]
+    output_file = sys.argv[2]
+
+    # Check if markdown file exists
+    if not os.path.isfile(markdown_file):
+        print(f"Missing {markdown_file}", file=sys.stderr)
+        sys.exit(1)
+
+    # Convert markdown to HTML
+    convert_markdown_to_html(markdown_file, output_file)
+
+    # Exit with success code
     sys.exit(0)
 
 
 if __name__ == "__main__":
-    if len(sys.argv) != 3:
-        # Check if correct number of arguments is provided
-        print(
-            "Usage: ./markdown2html.py README.md README.html",
-            file=sys.stderr
-        )
-        sys.exit(1)
-
-    markdown_file = sys.argv[1]
-    output_file = sys.argv[2]
-
-    convert_markdown_to_html(markdown_file, output_file)
+    main()
