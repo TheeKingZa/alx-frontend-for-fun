@@ -67,15 +67,15 @@ Improve markdown2html.py by parsing Headings Markdown syntax for generating HTML
 Syntax: (you can assume it will be strictly this syntax)
 <table>
   <th>Markdown </th> <td>HTML generated</td>
-<tr><td># Heading level 1</td>	    <td><\h1>Heading level 1</h1></td></tr>
-## Heading level 2	  <h2>Heading level 1</h2>
-### Heading level 3	  <h3>Heading level 1</h3>
-#### Heading level 4	<h4>Heading level 1</h4>
-##### Heading level 5	  <h5>Heading level 1</h5>
-###### Heading level 6	    <h6>Heading level 1</h6>
+<tr><td># Heading level 1</td>	    <td><h1>Heading level 1</h1></td></tr>
+<tr><td>## Heading level 2</td>	  <td><h2>Heading level 1</h2></td></tr>
+<tr><td>### Heading level 3	</td>  <td><h3>Heading level 1</h3></td></tr>
+<tr><td>#### Heading level 4</td>	<td><h4>Heading level 1</h4></td></tr>
+<tr><td>##### Heading level 5	</td>  <td><h5>Heading level 1</h5></td></tr>
+<tr><td>###### Heading level 6</td>	    <td><h6>Heading level 1</h6></td></tr>
 </table>
 
-
+```
 guillaume@vagrant:~/$ cat README.md
 # My title
 ## My title2
@@ -83,7 +83,6 @@ guillaume@vagrant:~/$ cat README.md
 #### My title4
 ### My title5
 
-```
 guillaume@vagrant:~/$ ./markdown2html.py README.md README.html 
 guillaume@vagrant:~/$ cat README.html 
 <h1>My title</h1>
@@ -99,8 +98,197 @@ Repo:
 
 GitHub repository: alx-frontend-for-fun
 File: markdown2html.py
+
 # Unordered listing
+
+Improve markdown2html.py by parsing Unordered listing syntax for generating HTML:
+
+Syntax: (you can assume it will be strictly this syntax)
+
+Markdown:
+```
+- Hello
+- Bye
+```
+
+HTML generated:
+```
+<ul>
+    <li>Hello</li>
+    <li>Bye</li>
+</ul>
+```
+
+```
+guillaume@vagrant:~/$ cat README.md
+# My title
+- Hello
+- Bye
+
+guillaume@vagrant:~/$ ./markdown2html.py README.md README.html 
+guillaume@vagrant:~/$ cat README.html 
+<h1>My title</h1>
+<ul>
+<li>Hello</li>
+<li>Bye</li>
+</ul>
+guillaume@vagrant:~/$ 
+```
+
+Spacing and new lines between HTML tags don’t need to be exactly this one
+
+Repo:
+
+GitHub repository: alx-frontend-for-fun
+File: markdown2html.py
+---
+
 # Ordered listing
+
+Improve markdown2html.py by parsing Ordered listing syntax for generating HTML:
+
+Syntax: (you can assume it will be strictly this syntax)
+
+Markdown:
+
+* Hello
+* Bye
+HTML generated:
+
+<ol>
+    <li>Hello</li>
+    <li>Bye</li>
+</ol>
+guillaume@vagrant:~/$ cat README.md
+# My title
+* Hello
+* Bye
+
+guillaume@vagrant:~/$ ./markdown2html.py README.md README.html 
+guillaume@vagrant:~/$ cat README.html 
+<h1>My title</h1>
+<ol>
+<li>Hello</li>
+<li>Bye</li>
+</ol>
+guillaume@vagrant:~/$ 
+Spacing and new lines between HTML tags don’t need to be exactly this one
+
+Repo:
+
+GitHub repository: alx-frontend-for-fun
+File: markdown2html.py
+
+
 # Simple text
+Improve markdown2html.py by parsing paragraph syntax for generating HTML:
+
+Syntax: (you can assume it will be strictly this syntax)
+
+Markdown:
+
+Hello
+
+I'm a text
+with 2 lines
+HTML generated:
+
+<p>
+    Hello
+</p>
+<p>
+    I'm a text
+        <br />
+    with 2 lines
+</p>
+guillaume@vagrant:~/$ cat README.md
+# My title
+- Hello
+- Bye
+
+Hello
+
+I'm a text
+with 2 lines
+
+guillaume@vagrant:~/$ ./markdown2html.py README.md README.html 
+guillaume@vagrant:~/$ cat README.html 
+<h1>My title</h1>
+<ul>
+<li>Hello</li>
+<li>Bye</li>
+</ul>
+<p>
+Hello
+</p>
+<p>
+I'm a text
+<br/>
+with 2 lines
+</p>
+guillaume@vagrant:~/$ 
+Spacing and new lines between HTML tags don’t need to be exactly this one
+
+Repo:
+
+GitHub repository: alx-frontend-for-fun
+File: markdown2html.py
+
 # Bold and emphasis
+
+Improve markdown2html.py by parsing bold syntax for generating HTML:
+
+Syntax: (you can assume it will be strictly this syntax)
+
+<table>
+  <th>Markup </th><td>HTML generated</td>
+<tr><td>**Hello**</td><td><b>Hello</b></td></tr>
+<tr><td>__Hekko__</td><td><em>Hello</em></td></tr>
+</table>
+```
+guillaume@vagrant:~/$ cat README.md
+# My title
+- He**l**lo
+- Bye
+
+Hello
+
+I'm **a** text
+with __2 lines__
+
+**Or in bold**
+
+guillaume@vagrant:~/$ ./markdown2html.py README.md README.html 
+guillaume@vagrant:~/$ cat README.html 
+<h1>My title</h1>
+<ul>
+<li>He<b>l</b>lo</li>
+<li>Bye</li>
+</ul>
+<p>
+Hello
+</p>
+<p>
+I'm <b>a</b> text
+<br/>
+with <em>2 lines</em>
+</p>
+<p>
+<b>Or in bold</b>
+</p>
+guillaume@vagrant:~/$ 
+```
+
+Spacing and new lines between HTML tags don’t need to be exactly this one
+
+Repo:
+
+GitHub repository: alx-frontend-for-fun
+File: markdown2html.py
+
+
 # [... but why]()
+
+Improve markdown2html.py by parsing bold syntax for generating HTML:
+
+Syntax: (you can assume it will be strictly this syntax)
