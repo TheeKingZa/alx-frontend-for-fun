@@ -245,6 +245,7 @@ Syntax: (you can assume it will be strictly this syntax)
 <tr><td>**Hello**</td><td><b>Hello</b></td></tr>
 <tr><td>__Hekko__</td><td><em>Hello</em></td></tr>
 </table>
+
 ```
 guillaume@vagrant:~/$ cat README.md
 # My title
