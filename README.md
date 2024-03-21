@@ -293,3 +293,60 @@ File: markdown2html.py
 Improve markdown2html.py by parsing bold syntax for generating HTML:
 
 Syntax: (you can assume it will be strictly this syntax)
+
+<table>
+<th>Markdown</th><td>HTML generated</td><td>description</td>
+  <tr><td>[[Hello]]</td><td>8b1a9953c4611296a827abf8c47804d7</td><td>convert in MD5 (lowercase) the content</td></tr>
+  <tr><td>((Hello Chicago))</td><td>Hello hiago</td><td>remove all c (case insensitive) from the content</td></tr>
+</table>
+
+```
+guillaume@vagrant:~/$ cat README.md
+# My title
+- He**l**lo
+- Bye
+
+Hello
+
+I'm **a** text
+with __2 lines__
+
+((I will live in Caracas))
+
+But it's [[private]]
+
+So cool!
+
+guillaume@vagrant:~/$ ./markdown2html.py README.md README.html 
+guillaume@vagrant:~/$ cat README.html 
+<h1>My title</h1>
+<ul>
+<li>He<b>l</b>lo</li>
+<li>Bye</li>
+</ul>
+<p>
+Hello
+</p>
+<p>
+I'm <b>a</b> text
+<br/>
+with <em>2 lines</em>
+</p>
+<p>
+I will live in araas
+</p>
+<p>
+But it's 2c17c6393771ee3048ae34d6b380c5ec
+</p>
+<p>
+So cool!
+</p>
+guillaume@vagrant:~/$ 
+```	
+
+Spacing and new lines between HTML tags don’t need to be exactly this one
+
+Repo:
+
+GitHub repository: alx-frontend-for-fun
+File: markdown2html.py
