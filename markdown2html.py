@@ -88,7 +88,7 @@ def convert_markdown_to_html(markdown_file, output_file):
             f.write(line)
 
 
-def main():
+if __name__ == "__main__":
     """Main function"""
     # Check number of arguments
     if len(sys.argv) != 3:
@@ -109,7 +109,3 @@ def main():
 
     # Exit with success code
     sys.exit(0)
-
-
-if __name__ == "__main__":
-    main()
