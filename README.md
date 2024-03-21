@@ -66,20 +66,16 @@ Improve markdown2html.py by parsing Headings Markdown syntax for generating HTML
 
 Syntax: (you can assume it will be strictly this syntax)
 <table>
-  <th>
-    Hello
-  </th>
-  <td>World!.</td>
+  <th>Markdown </th> <td>HTML generated</td>
+<tr># Heading level 1</tr>	    <tr><h1>Heading level 1</h1></tr>
+## Heading level 2	  <h2>Heading level 1</h2>
+### Heading level 3	  <h3>Heading level 1</h3>
+#### Heading level 4	<h4>Heading level 1</h4>
+##### Heading level 5	  <h5>Heading level 1</h5>
+###### Heading level 6	    <h6>Heading level 1</h6>
 </table>
 
-  
-Markdown	HTML generated
-# Heading level 1	<h1>Heading level 1</h1>
-## Heading level 2	<h2>Heading level 1</h2>
-### Heading level 3	<h3>Heading level 1</h3>
-#### Heading level 4	<h4>Heading level 1</h4>
-##### Heading level 5	<h5>Heading level 1</h5>
-###### Heading level 6	<h6>Heading level 1</h6>
+
 guillaume@vagrant:~/$ cat README.md
 # My title
 ## My title2
