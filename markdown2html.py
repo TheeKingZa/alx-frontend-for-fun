@@ -3,18 +3,22 @@
 Converts a Markdown file to HTML
 parsing headings,
 unordered,
-and ordered list syntax.
+and ordered list syntax,
+paragraph syntax,
+and bold syntax with special formatting rules.
 """
 
 import sys
 import os.path
 import re
+import hashlib
 
 
 def convert_markdown_to_html(markdown_file, output_file):
     """
     Converts a Markdown file to HTML, parsing headings,
-    unordered, and ordered list syntax.
+    unordered, and ordered list syntax, paragraph syntax,
+    and bold syntax with special formatting rules.
 
     Args:
         markdown_file (str): The name of the Markdown file.
@@ -44,12 +48,19 @@ def convert_markdown_to_html(markdown_file, output_file):
     # Regular expression pattern to match ordered list syntax
     ordered_list_pattern = re.compile(r'^\d+\.')
 
+    # Regular expression pattern to match bold syntax
+    bold_pattern = re.compile(r'\*\*(.*?)\*\*')
+
+    # Regular expression pattern to match special formatting syntax
+    special_format_pattern = re.compile(r'\[\[(.*?)\]\]|\(\((.*?)\)\)')
+
     # Read the contents of the Markdown file
     with open(markdown_file, 'r') as f:
         lines = f.readlines()
 
     html_lines = []
     in_list = False
+    in_paragraph = False
     for line in lines:
         line = line.strip()
         if line.startswith('#'):
@@ -71,15 +82,39 @@ def convert_markdown_to_html(markdown_file, output_file):
             list_item_text = line[2:] if list_char == '*' else line[3:]
             # Remove list character from text
             html_lines.append(f"<li>{list_item_text.strip()}</li>")
+        elif line:
+            if in_list:
+                html_lines.append(f'</{list_tag}>')
+                in_list = False
+            if not in_paragraph:
+                html_lines.append('<p>')
+                in_paragraph = True
+
+            # Replace bold syntax with HTML tags
+            line = bold_pattern.sub(r'<b>\1</b>', line)
+
+            # Apply special formatting rules
+            line = special_format_pattern.sub(
+                lambda m: hashlib.md5(m.group(1).lower().encode()).hexdigest()
+                if m.group(1) else m.group(2).replace('c', '', -1).title(),
+                line
+            )
+
+            html_lines.append(line)
         else:
             if in_list:
                 html_lines.append(f'</{list_tag}>')
                 in_list = False
-            html_lines.append(line)
+            if in_paragraph:
+                html_lines.append('</p>')
+                in_paragraph = False
 
     # If a list is still open, close it
     if in_list:
         html_lines.append(f'</{list_tag}>')
+    # If a paragraph is still open, close it
+    if in_paragraph:
+        html_lines.append('</p>')
 
     # Write HTML output to the specified file
     with open(output_file, 'w') as f:
