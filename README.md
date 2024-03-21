@@ -67,7 +67,7 @@ Improve markdown2html.py by parsing Headings Markdown syntax for generating HTML
 Syntax: (you can assume it will be strictly this syntax)
 <table>
   <th>Markdown </th> <td>HTML generated</td>
-<tr># Heading level 1</tr>	    <tr><h1>Heading level 1</h1></tr>
+<tr><td># Heading level 1</td>	    <td><\h1>Heading level 1</h1></td></tr>
 ## Heading level 2	  <h2>Heading level 1</h2>
 ### Heading level 3	  <h3>Heading level 1</h3>
 #### Heading level 4	<h4>Heading level 1</h4>
@@ -83,6 +83,7 @@ guillaume@vagrant:~/$ cat README.md
 #### My title4
 ### My title5
 
+```
 guillaume@vagrant:~/$ ./markdown2html.py README.md README.html 
 guillaume@vagrant:~/$ cat README.html 
 <h1>My title</h1>
@@ -91,6 +92,7 @@ guillaume@vagrant:~/$ cat README.html
 <h4>My title4</h4>
 <h3>My title5</h3>
 guillaume@vagrant:~/$ 
+```
 Spacing and new lines between HTML tags don’t need to be exactly this one
 
 Repo:
