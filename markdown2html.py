@@ -1,14 +1,16 @@
 #!/usr/bin/python3
 """
-Converts a Markdown file to HTML, parsing headings syntax.
+Converts a Markdown file to HTML, parsing headings and unordered list syntax.
 """
 
 import sys
 import os.path
 
+
 def convert_markdown_to_html(markdown_file, output_file):
     """
-    Converts a Markdown file to HTML, parsing headings syntax.
+    Converts a Markdown file to HTML, parsing headings
+    and unordered list syntax.
 
     Args:
         markdown_file (str): The name of the Markdown file.
@@ -34,6 +36,7 @@ def convert_markdown_to_html(markdown_file, output_file):
         lines = f.readlines()
 
     html_lines = []
+    in_list = False
     for line in lines:
         line = line.strip()
         if line.startswith('#'):
@@ -43,8 +46,21 @@ def convert_markdown_to_html(markdown_file, output_file):
             # Map Markdown heading level to HTML tag
             html_lines.append(f"<{html_tag}>{heading_text}</{html_tag}>")
             # Generate HTML line with corresponding tag
+        elif line.startswith('- '):
+            if not in_list:
+                html_lines.append('<ul>')
+                # Start unordered list
+                in_list = True
+            # Extract list item text and add to HTML
+            list_item_text = line[2:]
+            html_lines.append(f"<li>{list_item_text}</li>")
         else:
-            html_lines.append(line)  # If not a heading, simply append the line
+            if in_list:
+                html_lines.append('</ul>')
+                # End unordered list if no more list items
+                in_list = False
+            html_lines.append(line)
+            # If not a heading or list item, simply append the line
 
     # Write HTML output to the specified file
     with open(output_file, 'w') as f:
@@ -57,7 +73,10 @@ def convert_markdown_to_html(markdown_file, output_file):
 if __name__ == "__main__":
     if len(sys.argv) != 3:
         # Check if correct number of arguments is provided
-        print("Usage: ./markdown2html.py README.md README.html", file=sys.stderr)
+        print(
+            "Usage: ./markdown2html.py README.md README.html",
+            file=sys.stderr
+        )
         sys.exit(1)
 
     markdown_file = sys.argv[1]
