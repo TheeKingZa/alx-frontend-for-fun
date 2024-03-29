@@ -404,6 +404,9 @@
   flex-wrap: wrap;
 }
 
+/* Section ABOUT US
+    ============================= */
+
 .section-about-us {
     /* Target all classes that begin with col- inside section-about-us CLASS */
     .col- {
