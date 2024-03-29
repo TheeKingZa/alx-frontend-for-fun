@@ -371,10 +371,9 @@
     padding: 10rem 40rem 2rem 0;
   }
 
-    /* Section Latest news
-      ============================= */
-  
-  
+/* Section Latest news
+   ============================= */
+     
   /* Reverse the order of the Latest news cards */
   .section-latest-news .row {
     flex-direction: row-reverse;
