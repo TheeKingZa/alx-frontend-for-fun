@@ -1,0 +1,46 @@
+.container {
+    display: flex;
+    justify-content: center;
+    flex-wrap: wrap;
+    max-width: 100%;
+    height: 100vh; /* 100% of the viewport height */
+    align-items: center;
+}
+
+.box {
+    color: white;
+    display: flex;
+   /* justify-content: center;*/
+    /* align-items: center;*/
+    font-family:  sans-serif, Arial;
+}
+
+.box1 {
+    background: #7fff00; /* Lime */
+    flex-basis: 5%;
+    font-size: 2rem;
+}
+
+.box2 {
+    background: #87ceeb; /* Light Sky Blue */
+    flex-basis: 15%;
+    font-size: 7rem;
+}
+
+.box3 {
+    background: #00008b; /* Dark Blue */
+    flex-basis: 30%;
+    font-size: 12rem;
+}
+
+.box4 {
+    background: #8b008b; /* Dark Magenta */
+    flex-basis: 15%;
+    font-size: 7rem;
+}
+
+.box5 {
+    background: #ff8c00; /* Dark Orange */
+    flex-basis: 5%;
+    font-size: 2rem;
+}
