@@ -3,13 +3,16 @@
     justify-content: center;
     flex-wrap: wrap;
     max-width: 100%;
-    height: 100vh; /* 100% of the viewport height */
+    height: auto; /* 100% of the viewport height */
     align-items: center;
 }
 
+
 .box {
+    font-size: ;
     color: white;
     display: flex;
+    padding: 20px;
     font-family:  sans-serif, Arial;
 }
 
@@ -23,6 +26,7 @@
     background: #87ceeb; /* Light Sky Blue */
     flex-basis: 15%;
     font-size: 7rem;
+    margin: 0;
 }
 
 .box3 {
