@@ -646,3 +646,35 @@
   .tag-list li:last-child::after {
     content: "";
   }
+
+
+  /*** FORM ***/
+/* Comment section */
+/* Target post-comments class */
+.post-comments {
+  /* Property: width, Value: 80% */
+  width: 80%;
+  /* Property: margin, Value: 10rem 0 0 auto */
+  margin: 10rem 0 0 auto;
+  /* Property: padding-left, Value: 7rem */
+  padding-left: 7rem;
+}
+
+/* Target the section-title class inside the post-comments class */
+.post-comments .section-title {
+  /* Property: font-variant, Value: small-caps */
+  font-variant: small-caps;
+}
+
+/* Basic form */
+/* Target all form */
+form {
+  /* Property: display, Value: flex */
+  display: flex;
+  /* Property: flex-direction, Value: column */
+  flex-direction: column;
+  /* Property: padding, Value: 1rem 0 */
+  padding: 1rem 0;
+  /* Property: margin, Value: 0 */
+  margin: 0;
+}
