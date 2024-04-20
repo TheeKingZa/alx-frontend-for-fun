@@ -17,7 +17,8 @@
 * [Tink - Léonie Watson – On technology, food & life in the digital age](https://tink.uk/)
 * [Accessibility Weekly](https://a11yweekly.com/)
 * [Section508.gov | GSA Government-wide IT Accessibility Program](https://www.section508.gov/)
-
+* [namespacing by Harry Roberts)](https://csswizardry.com/2015/03/more-transparent-ui-code-with-namespaces/)
+* [You can install the Landmarks extension](https://matatk.agrip.org.uk/landmarks/)
 ---
 
 # NEED TO KNOW?

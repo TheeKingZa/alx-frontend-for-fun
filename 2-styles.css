@@ -1,0 +1,67 @@
+/**
+ * 2-styles.css.
+ *
+ * @This CSS code defines styles for a toggle switch.
+ */
+
+/* Styles for the toggle label */
+.toggle-label {
+    position: relative; /* Positions the toggle label */
+    display: inline-block; /* Displays the label as an inline block */
+    width: 60px; /* Width of the toggle label */
+    height: 20px; /* Height of the toggle label */
+    background-color: #ebebeb; /* Background color of the toggle label */
+    border-radius: 20px; /* Border radius to create a rounded shape */
+    border: 1px solid lightgray; /* Border around the toggle label */
+  }
+  
+  /* Styles for the pseudo-element after the toggle label */
+  .toggle-label::after {
+    content: ""; /* Generates an empty content for the pseudo-element */
+    position: absolute; /* Positions the pseudo-element absolutely */
+    width: 30px; /* Width of the pseudo-element */
+    height: 30px; /* Height of the pseudo-element */
+    border-radius: 50%; /* Border radius to create a circular shape */
+    background-color: white; /* Background color of the pseudo-element */
+    top: -4px; /* Position the pseudo-element slightly above the label */
+    left: -1px; /* Position the pseudo-element slightly to the left of the label */
+    transition: all 0.3s; /* Adds a transition effect for smooth animation */
+    border: 1px solid lightgray; /* Border around the pseudo-element */
+  }
+  
+  /* Styles for the inner content of the toggle label */
+  .toggle-inner {
+    font-family: "Open Sans", "Helvetica Neue", Helvetica, Arial, sans-serif; /* Font family for the inner content */
+    font-size: 0.9rem; /* Font size for the inner content */
+  }
+  
+  /* Styles for the text "Yes" before the toggle */
+  .toggle-inner::before {
+    content: "Yes"; /* Adds the text "Yes" before the toggle */
+    color: white; /* Text color for "Yes" */
+    padding-left: 6px; /* Adds padding to the left of the text */
+  }
+  
+  /* Styles for the text "No" after the toggle */
+  .toggle-inner::after {
+    content: "No"; /* Adds the text "No" after the toggle */
+    color: #c3c3c3; /* Text color for "No" */
+    padding-left: 6px; /* Adds padding to the left of the text */
+  }
+  
+  /* Styles for the toggle input checkbox */
+  .toggle-cb {
+    -webkit-appearance: none; /* Removes default styling for WebKit browsers */
+    -moz-appearance: none; /* Removes default styling for Mozilla browsers */
+  }
+  
+  /* Styles for the pseudo-element after the toggle label when the checkbox is checked */
+  .toggle-cb:checked + .toggle-label::after {
+    left: 33px; /* Moves the pseudo-element to the right to indicate the "checked" state */
+  }
+  
+  /* Styles for the toggle label when the checkbox is checked */
+  .toggle-cb:checked + .toggle-label {
+    background-color: #d73953; /* Changes the background color of the label when checked */
+  }
+  

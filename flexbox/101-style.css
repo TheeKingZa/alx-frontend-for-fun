@@ -9,17 +9,16 @@
 
 
 .box {
-    font-size: ;
     color: white;
     display: flex;
     padding: 20px;
+     font-size: 2rem;
     font-family:  sans-serif, Arial;
 }
 
 .box1 {
     background: #7fff00; /* Lime */
     flex-basis: 5%;
-    font-size: 2rem;
 }
 
 .box2 {

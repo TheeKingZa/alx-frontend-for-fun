@@ -1,0 +1,33 @@
+/**
+ * 1-styles.css.
+ *
+ * @ anchor links within h2 headings by creating a smooth hover effect.
+ * It removes the default underline,
+ * replacing it with a sliding underline that 
+ * gradually appears when hovering over the link
+ */
+
+/* Styles for the anchor element within an h2 */
+h2 a {
+    text-decoration: none; /* Removes the default underline from the anchor */
+    position: relative; /* Positions the pseudo-element relative to the anchor */
+    color: #8a153a; /* Sets the text color of the anchor */
+  }
+  
+  /* Styles for the pseudo-element before the anchor */
+  h2 a::before {
+    content: ""; /* Generates an empty content for the pseudo-element */
+    bottom: 0; /* Aligns the bottom of the pseudo-element with the bottom of the anchor */
+    width: 0; /* Initially sets the width of the pseudo-element to 0 */
+    height: 0.1rem; /* Sets the height of the pseudo-element to create the underline */
+    position: absolute; /* Positions the pseudo-element absolutely within the anchor */
+    transition: 0.9s cubic-bezier(0.17, 0.67, 0, 1.01); /* Adds a transition effect for smooth animation */
+  }
+  
+  /* Styles for the pseudo-element before the anchor when hovering */
+  a:hover::before {
+    left: 0; /* Moves the pseudo-element to the left edge of the anchor */
+    background-color: #8a153a; /* Sets the background color of the pseudo-element */
+    width: 100%; /* Extends the width of the pseudo-element to cover the anchor */
+  }
+  

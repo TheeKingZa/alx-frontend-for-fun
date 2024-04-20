@@ -1,0 +1,117 @@
+/**
+* 3-styles.css
+* 
+* @This CSS code defines styles for a menu toggle
+*/
+
+/*
+ Menu Section
+    ====================================== */
+
+    /* Styles for the menu container */
+.menu {
+    display: flex; /* Displays the menu items in a column */
+    flex-direction: column; /* Arranges the menu items vertically */
+  }
+  
+  /* Styles for the menu open checkbox */
+  .menu-open {
+    -webkit-appearance: none; /* Removes default styling for WebKit browsers */
+    -moz-appearance: none; /* Removes default styling for Mozilla browsers */
+  }
+  
+  /* Styles for the menu open button */
+  .menu-open-button {
+    display: flex; /* Displays the button as a flex container */
+    flex-direction: column; /* Arranges the content vertically within the button */
+    border-radius: 50%; /* Creates a circular shape for the button */
+    background-color: #d73953; /* Background color of the button */
+    height: 2rem; /* Height of the button */
+    width: 2rem; /* Width of the button */
+    margin-bottom: 5px; /* Margin at the bottom of the button */
+  }
+  
+  /* Styles for the lines in the menu button */
+  .menu-line {
+    margin: 1px auto; /* Centers the lines horizontally */
+    width: 10px; /* Width of the lines */
+    height: 1px; /* Height of the lines */
+    background: white; /* Color of the lines */
+  }
+  
+  /* Styles for the menu items */
+  .menu-item {
+    display: none; /* Initially hides the menu items */
+    align-items: center; /* Aligns items along the vertical axis */
+    justify-content: center; /* Aligns items along the horizontal axis */
+    color: white; /* Text color of the menu items */
+    font-size: 1rem; /* Font size of the menu items */
+    border-radius: 50%; /* Creates a circular shape for the menu items */
+    background-color: #d73953; /* Background color of the menu items */
+    height: 2rem; /* Height of the menu items */
+    width: 2rem; /* Width of the menu items */
+    margin-bottom: 5px; /* Margin at the bottom of the menu items */
+  }
+  
+  /* Hover effect for the menu open button */
+  .menu-open-button:hover {
+    height: 2.1rem; /* Increases the height of the button on hover */
+    width: 2.1rem; /* Increases the width of the button on hover */
+    transition: 0.1s ease-out; /* Adds a smooth transition effect */
+  }
+  
+  /* Hover effect for the first line in the menu button */
+  .menu-open-button:hover .menu-line-1 {
+    margin-top: 13px; /* Moves the first line down on hover */
+    transition: 0.1s ease-out; /* Adds a smooth transition effect */
+  }
+  
+  /* Hover effect for all lines in the menu button */
+  .menu-open-button:hover .menu-line {
+    margin-top: 6px auto; /* Moves all lines down on hover */
+  }
+  
+  /* Positioning for the first line in the menu button */
+  .menu-line-1 {
+    margin-top: 12px; /* Positions the first line */
+  }
+  
+  /* Styles for the menu items when the menu is open */
+  .menu-open:checked ~ .menu-open-button,
+  .menu-open:checked ~ .menu-item {
+    height: 1.5rem; /* Reduces the height of the button and menu items */
+    width: 1.5rem; /* Reduces the width of the button and menu items */
+    font-size: 7px; /* Reduces the font size of the menu items */
+  }
+  
+  /* Styles for the third line in the menu button when the menu is open */
+  .menu-open:checked ~ .menu-open-button > .menu-line-3 {
+    display: none; /* Hides the third line when the menu is open */
+  }
+  
+  /* Rotation and positioning for the first line in the menu button when the menu is open */
+  .menu-open:checked ~ .menu-open-button > .menu-line-1 {
+    transform: rotate(45deg); /* Rotates the first line */
+    margin-top: 11.5px; /* Adjusts the position of the first line */
+    transition: 0.1s ease-out; /* Adds a smooth transition effect */
+  }
+  
+  /* Rotation and positioning for the second line in the menu button when the menu is open */
+  .menu-open:checked ~ .menu-open-button > .menu-line-2 {
+    transform: rotate(-45deg); /* Rotates the second line */
+    margin-top: -1.5px; /* Adjusts the position of the second line */
+    transition: 0.1s ease-out; /* Adds a smooth transition effect */
+  }
+  
+  /* Display the menu items when the menu is open */
+  .menu-open:checked ~ .menu-item {
+    display: flex; /* Displays the menu items */
+  }
+  
+  /* Hover effect for the menu items when the menu is open */
+  .menu-open:checked ~ .menu-item:hover {
+    background-color: white; /* Changes the background color on hover */
+    color: #d73953; /* Changes the text color on hover */
+    border: 0.5px solid #d73953; /* Adds a border on hover */
+  }
+  
