@@ -1,0 +1,49 @@
+/**
+ * 0-styles.css
+ * 
+ * @This CSS code defines styles for a list (ul) and list items (li),
+ *      as well as icons within the list items.
+*/
+
+/* Styles for the unordered list */
+ul {
+    display: flex; /* Makes the list items display horizontally */
+    justify-content: center; /* Centers the list items horizontally */
+  }
+  
+  /* Styles for the list items */
+  li {
+    background-color: #f7f7f7; /* Background color of each list item */
+    list-style: none; /* Removes the default bullet point */
+    text-align: center; /* Centers the text within the list item */
+    border: 2px solid gray; /* Border around each list item */
+    border-radius: 0.5rem; /* Rounded corners for the border */
+    display: flex; /* Makes the content within the list item display as a flex container */
+    flex-direction: column; /* Arranges the content vertically within the list item */
+    margin: 1rem; /* Margin around each list item */
+    padding-top: 10px; /* Padding at the top of each list item */
+    font-size: 2rem; /* Font size of the text within each list item */
+  }
+  
+  /* Styles for the icon */
+  .icon {
+    display: inline-block; /* Displays the icon as an inline block */
+    background-image: url("./0-sprite.png"); /* Sets the background image for the icon */
+    background-repeat: no-repeat; /* Prevents the background image from repeating */
+    height: 400px; /* Height of the icon */
+    width: 300px; /* Width of the icon */
+  }
+  
+  /* Styles for specific icons within list items */
+  li span.i-html {
+    background-position: left center; /* Positions the HTML icon to the left within its container */
+  }
+  
+  li span.i-css {
+    background-position: center; /* Positions the CSS icon at the center within its container */
+  }
+  
+  li span.i-js {
+    background-position: right center; /* Positions the JavaScript icon to the right within its container */
+  }
+  
