@@ -212,5 +212,5 @@ These are the basics of Sass that cover a range of topics from syntax to advance
 ---
 
 [`^`](#need-to-know)
-
+[`GettingStarted`](#getting-started-with-scss)
 ---
