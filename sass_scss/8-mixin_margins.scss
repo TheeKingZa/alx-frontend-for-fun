@@ -1,0 +1,15 @@
+// Define mixin for setting left and right margins
+@mixin margins {
+    margin-left: $left-margin;
+    margin-right: $right-margin;
+  }
+  
+  // Apply margins using mixin
+  body {
+    @include margins;
+  }
+  
+  div {
+    @include margins;
+  }
+  
