@@ -1,0 +1,15 @@
+// Import the list to be sorted
+@import '103-sort_list';
+
+// Mixin to sort the list
+@mixin sort-list($list) {
+  $sorted-list: ();
+  @each $item in $list {
+    $sorted-list: append($sorted-list, $item);
+  }
+  $sorted-list: sort($sorted-list);
+  @debug $sorted-list;
+}
+
+// Apply the mixin to the list
+@include sort-list($list_to_sort);
