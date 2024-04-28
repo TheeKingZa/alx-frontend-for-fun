@@ -1,0 +1,12 @@
+// Assign font size 20px to h1 tags
+h1 {
+    font-size: 20px;
+  }
+  
+  // Apply font size 14px to h1 tags when screen width is smaller than 320px using media query
+  @media screen and (max-width: 320px) {
+    h1 {
+      font-size: 14px;
+    }
+  }
+  
