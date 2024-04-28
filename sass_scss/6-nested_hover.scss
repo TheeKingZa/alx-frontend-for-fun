@@ -2,7 +2,7 @@
 button {
     color: #FF0000; // Set text color to red
     
-    &:hover {
+    :hover {
       color: #00FF00; // Change text color to green on hover
     }
   }
