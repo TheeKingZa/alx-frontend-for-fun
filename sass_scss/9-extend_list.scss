@@ -1,0 +1,16 @@
+// Define base styles for .info class
+.info {
+    font-size: 12px;
+  }
+  
+  // Extend .info class for additional styles
+  .success {
+    @extend .info;
+    color: #00FF00;
+  }
+  
+  .warning {
+    @extend .info;
+    color: #FF0000;
+  }
+  
