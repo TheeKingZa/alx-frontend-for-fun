@@ -43,6 +43,29 @@ Comments for your Scss file:
     Ruby Sass 3.7.4
 ```
 
+# Used for this project:
+1. Install Ruby Development Headers:
+    * It appears that the installation failed due to missing header files for Ruby. You may need to install the development package for Ruby. On Ubuntu, you can do this with the following command:
+```
+    sudo apt-get install ruby-dev
+
+```
+2. Install Sass Globally:
+    * Once you have resolved any issues with the Ruby development environment, you can try installing Sass globally again:
+```
+    sudo gem install sass -v 3.7.4
+
+```
+3. Verify Installation:
+    * After installing Sass, you can verify the installation by checking the version:
+```
+    sass --version
+```
+
+
+
+
+
 ---
 # What Sass means:
 Sass stands for "Syntactically Awesome StyleSheets". It's a preprocessor scripting language that is interpreted or compiled into Cascading Style Sheets (CSS).
