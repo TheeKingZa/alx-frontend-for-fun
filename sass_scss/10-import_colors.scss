@@ -1,0 +1,15 @@
+// Import the file containing color variables
+@import "10-colors";
+
+// Apply text color based on color variables
+.red {
+  color: $red;
+}
+
+.green {
+  color: $green;
+}
+
+.blue {
+  color: $blue;
+}
