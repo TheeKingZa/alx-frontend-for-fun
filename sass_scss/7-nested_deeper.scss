@@ -1,0 +1,15 @@
+// Apply font size 14px to all body tags
+body {
+    font-size: 14px;
+  
+    // Apply font size 16px to h1 tags inside body tags
+    h1 {
+      font-size: 16px;
+  
+      // Apply font size 12px to h1 tags of class .smaller inside body tags
+      &.smaller {
+        font-size: 12px;
+      }
+    }
+  }
+  
