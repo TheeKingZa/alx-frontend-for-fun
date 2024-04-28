@@ -1,0 +1,7 @@
+// Loop through column classes from 1 to 4 and assign widths based on the number of columns
+@for $i from 1 through 4 {
+    .col-#{$i} {
+      width: percentage(1 / $i);
+    }
+  }
+  
