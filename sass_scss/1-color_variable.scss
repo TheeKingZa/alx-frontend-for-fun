@@ -1,0 +1,11 @@
+// Define a Variable to store the main color
+$main-color: #3D3D3D;
+
+// Apply the color to the body and p elements.
+body {
+    color: $main-color; 
+}
+
+p {
+    color: $main-color;
+}
