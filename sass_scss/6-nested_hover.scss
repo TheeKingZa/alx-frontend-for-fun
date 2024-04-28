@@ -1,10 +1,9 @@
-// Apply styles to button tags
+// Define styles for button tags
 button {
-    color: #FF0000;
-  
-    //  on Hover Change text color 
+    color: #FF0000; // Set text color to red
+    
     &:hover {
-      color: #00FF00;
+      color: #00FF00; // Change text color to green on hover
     }
   }
   
